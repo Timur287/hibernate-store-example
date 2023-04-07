@@ -1,7 +1,7 @@
 package com.java.dev.hibernate.role.domain;
 
 
-import com.java.dev.hibernate.customer.domain.Customer;
+import com.java.dev.hibernate.customer.domain.Client;
 import com.java.dev.hibernate.permission.domain.Permission;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,8 +25,12 @@ public class Role {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-    private Set<Customer> customers = new HashSet<>(); // TODO: почему нужно инициализировать коллекции
+    private Set<Client> clients = new HashSet<>(); // TODO: почему нужно инициализировать коллекции
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "role_permission",
+            joinColumns = @JoinColumn(referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+    )
     private Set<Permission> permissions = new HashSet<>();
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 @Data // TODO: можно ли использовать к энтити? Есть ли проблема с equals/hash code
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
+public class Client {
 
     @Id
     @GeneratedValue(generator = "customer_id_gen")
@@ -32,5 +32,9 @@ public class Customer {
     private Role role;
 
     @ManyToMany
+    @JoinTable(name = "clients_products_cart",
+            joinColumns = {@JoinColumn(name = "client_id", referencedColumnName = "id"), @JoinColumn(name = "product_count")},
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id")
+    )
     private Set<Product> products = new HashSet<>();
 }

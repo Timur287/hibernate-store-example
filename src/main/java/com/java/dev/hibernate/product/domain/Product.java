@@ -1,6 +1,6 @@
 package com.java.dev.hibernate.product.domain;
 
-import com.java.dev.hibernate.customer.domain.Customer;
+import com.java.dev.hibernate.customer.domain.Client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +24,6 @@ public class Product {
     private int price;
     private String description;
 
-    @ManyToMany
-    private Set<Customer> clients = new HashSet<>();
+    @ManyToMany(mappedBy = "products")
+    private Set<Client> clients = new HashSet<>();
 }
